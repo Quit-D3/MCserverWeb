@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snow 轻量 & 稳定 | 主页</title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.cnpmjs.org/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        /* 基础变量 */
+        :root {
+            --mc-blue: #2d8cff;
+            --mc-green: #3b8526;
+            --mc-gold: #ffcc00;
+            --mc-text: #333;
+            --mc-card: #ffffff;
+            --mc-shadow: rgba(0, 0, 0, 0.1);
+            --mc-border: #e0e0e0;
+            --mc-snow: #e0f7fa;
+            --mc-primary: #2d8cff;
+            --mc-secondary: #3b8526;
+            --mc-dark: #1a1a2e;
+        }
+
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f8ff 0%, var(--mc-snow) 100%);
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            color: var(--mc-text);
+            position: relative;
+            min-height: 100vh;
+            transition: all 0.4s ease;
+            overflow-x: hidden;
+        }
+
+        .dark-mode {
+            --mc-text: #f0f0f0;
+            --mc-card: #1a1a2e;
+            --mc-shadow: rgba(0, 0, 0, 0.5);
+            --mc-border: #444;
+            --mc-snow: #0c1d28;
+            background: linear-gradient(135deg, #0c1d28 0%, #1a1a1a 100%);
+        }
+
+        /* 容器样式 */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 顶部横栏 */
+        .top-bar {
+            background: var(--mc-card);
+            padding: 15px 0;
+            border-bottom: 3px solid var(--mc-blue);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 12px var(--mc-shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .top-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* 服务器Logo */
+        .server-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .server-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(45, 140, 255, 0.4);
+            overflow: hidden;
+        }
+
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--mc-text);
+            position: relative;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        .logo-text span {
+            color: var(--mc-blue);
+            position: relative;
+        }
+
+        .logo-text span::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--mc-green);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-text:hover span::after {
+            transform: scaleX(1);
+        }
+
+        /* 导航按钮 */
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-btn {
+            width: 90px;
+            height: 90px;
+            background: var(--mc-card);
+            border: 2px solid var(--mc-border);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            padding: 8px;
+            box-shadow: 0 4px 8px var(--mc-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: rgba(45, 140, 255, 0.1);
+            transition: height 0.3s ease;
+            z-index: 1;
+        }
+
+        .nav-btn:hover::before {
+            height: 100%;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px);
+            border-color: var(--mc-blue);
+            box-shadow: 0 8px 16px var(--mc-shadow);
+        }
+
+        .nav-btn i {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: var(--mc-blue);
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-btn span {
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: var(--mc-text);
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-btn.active {
+            border-color: var(--mc-blue);
+            background: rgba(45, 140, 255, 0.1);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 主题切换按钮 */
+        .theme-toggle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--mc-card);
+            border: 2px solid var(--mc-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-left: 10px;
+            box-shadow: 0 4px 8px var(--mc-shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(15deg);
+            border-color: var(--mc-blue);
+        }
+
+        /* 主要内容 */
+        .mc-section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+            color: var(--mc-text);
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--mc-blue), var(--mc-green));
+            border-radius: 2px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* 首页横幅轮播图 */
+        .hero-section {
+            position: relative;
+            padding: 140px 0;
+            overflow: hidden;
+            border-radius: 0 0 20px 20px;
+            text-align: center;
+        }
+
+        .carousel-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .carousel-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .carousel-item.active {
+            opacity: 1;
+        }
+
+        .carousel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+            z-index: 1;
+        }
+
+        .dark-mode .carousel-overlay {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            color: white !important;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            color: white !important;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .mc-btn {
+            background: var(--mc-blue);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            margin: 10px;
+            box-shadow: 0 4px 6px var(--mc-shadow);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mc-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .mc-btn:hover::before {
+            width: 100%;
+        }
+
+        .mc-btn:hover {
+            background: #1a73e8;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px var(--mc-shadow);
+        }
+
+        .mc-btn.secondary {
+            background: var(--mc-green);
+        }
+
+        .mc-btn.secondary:hover {
+            background: #2a6c1b;
+        }
+
+        .mc-btn i {
+            margin-right: 8px;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* 服务器状态按钮 */
+        .status-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 1.1rem;
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+        }
+
+        .status-operating {
+            background: var(--mc-green);
+            color: white;
+            border: 2px solid var(--mc-green);
+        }
+
+        .status-developing {
+            background: transparent;
+            color: var(--mc-blue);
+            border: 2px solid var(--mc-blue);
+        }
+
+        /* 多样玩法模块 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .mc-card {
+            background: var(--mc-card);
+            border: 2px solid var(--mc-border);
+            border-radius: 8px;
+            transition: all 0.3s;
+            height: 100%;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 12px var(--mc-shadow);
+        }
+
+        .mc-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--mc-blue);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+
+        .mc-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--mc-blue);
+            box-shadow: 0 12px 20px var(--mc-shadow);
+        }
+
+        .mc-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            color: var(--mc-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .mc-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .mc-card h4 {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .mc-card p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .dark-mode .mc-card p {
+            color: #ddd;
+        }
+
+        .badge-dev {
+            display: block;
+            background: var(--mc-green);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 10px auto 0;
+            width: fit-content;
+        }
+
+        .dark-mode .badge-dev {
+            background: #2a6c1b;
+        }
+
+        .progress-section {
+            margin: 40px 0;
+        }
+
+        .progress-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--mc-text);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .progress {
+            height: 12px;
+            background: #e9ecef;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            background: var(--mc-blue);
+            transition: width 1s ease;
+            height: 100%;
+        }
+
+        /* 硬件信息展示 */
+        .hardware-section {
+            background: var(--mc-card);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 30px;
+            border: 2px solid var(--mc-border);
+            box-shadow: 0 6px 12px var(--mc-shadow);
+        }
+
+        .hardware-title {
+            font-size: 1.8rem;
+            color: var(--mc-blue);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .hardware-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .hardware-item {
+            background: rgba(250, 250, 250, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--mc-blue);
+            box-shadow: 0 4px 8px var(--mc-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .hardware-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .dark-mode .hardware-item {
+            background: rgba(40, 40, 40, 0.7);
+        }
+
+        .hardware-item h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--mc-text);
+            margin-bottom: 15px;
+        }
+
+        .hardware-item p {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--mc-text);
+        }
+
+        .hardware-value {
+            color: var(--mc-blue);
+            font-weight: bold;
+        }
+
+        /* 页脚 */
+        .mc-footer {
+            background: var(--mc-card);
+            border-top: 3px solid var(--mc-border);
+            padding: 3rem 0 1.5rem;
+            box-shadow: 0 -4px 12px var(--mc-shadow);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .footer-logo {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo i {
+            font-size: 2rem;
+            color: var(--mc-blue);
+            margin-bottom: 10px;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--mc-text);
+        }
+
+        .footer-subtitle {
+            font-size: 1rem;
+            color: var(--mc-text);
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-divider {
+            width: 80%;
+            max-width: 400px;
+            height: 1px;
+            background: var(--mc-border);
+            margin: 1.5rem 0;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-link {
+            color: var(--mc-blue);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-link:hover {
+            color: #1a73e8;
+            transform: translateY(-2px);
+        }
+
+        .copyright {
+            color: var(--mc-text);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* 服务器卡片 */
+        .server-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .server-card {
+            background: var(--mc-card);
+            border-radius: 12px;
+            padding: 35px;
+            border: 2px solid var(--mc-border);
+            text-align: center;
+            box-shadow: 0 6px 12px var(--mc-shadow);
+            transition: all 0.3s;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .server-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('./img/main8.png') center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .server-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px var(--mc-shadow);
+            border-color: var(--mc-blue);
+        }
+
+        .server-title {
+            font-size: 1.8rem;
+            color: var(--mc-blue);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .server-badge {
+            font-size: 1.2rem;
+            background: var(--mc-blue);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .dev-badge {
+            background: var(--mc-green);
+        }
+
+        .server-card p {
+            margin: 10px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .server-card .lead {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        /* 服务端支持 */
+        .support-section {
+            background: var(--mc-card);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 50px 0;
+            border: 2px solid var(--mc-border);
+            box-shadow: 0 6px 12px var(--mc-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .support-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .support-title {
+            font-size: 1.8rem;
+            color: var(--mc-blue);
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .support-type {
+            font-size: 1.4rem;
+            color: var(--mc-blue);
+            margin: 25px 0 15px;
+            padding-left: 15px;
+            border-left: 4px solid var(--mc-blue);
+            position: relative;
+            z-index: 1;
+        }
+
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .support-item {
+            background: rgba(250, 250, 250, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--mc-blue);
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .support-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px var(--mc-shadow);
+        }
+
+        .support-icon {
+            font-size: 3rem;
+            color: var(--mc-blue);
+            margin-bottom: 15px;
+        }
+
+        .support-item h4 {
+            color: var(--mc-text);
+            margin-bottom: 10px;
+        }
+
+        .support-item p {
+            color: var(--mc-text);
+            font-size: 0.9rem;
+        }
+
+        .support-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--mc-blue);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .support-link:hover {
+            color: #1a73e8;
+            transform: translateX(5px);
+        }
+
+        /* 模态框 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 90%;
+            max-height: 90vh;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .dark-mode .modal-content {
+            background: #2d2d2d;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
+            transition: all 0.3s;
+        }
+
+        .dark-mode .close-modal {
+            color: #fff;
+        }
+
+        .close-modal:hover {
+            color: var(--mc-blue);
+            transform: scale(1.2);
+        }
+
+        /* 粒子背景 */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* 轮播指示器 */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 3;
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-indicator.active {
+            background: var(--mc-blue);
+            transform: scale(1.2);
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 1200px) {
+            .hardware-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .server-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-btn {
+                width: 80px;
+                height: 80px;
+            }
+
+            .nav-btn i {
+                font-size: 1.8rem;
+            }
+
+            .nav-btn span {
+                font-size: 0.85rem;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .server-logo {
+                justify-content: center;
+            }
+
+            .nav-buttons {
+                justify-content: center;
+            }
+
+            .mc-section {
+                padding: 3rem 0;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .hardware-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-section {
+                padding: 80px 0;
+            }
+
+            .server-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .server-card {
+                margin-bottom: 25px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-btn {
+                width: 70px;
+                height: 70px;
+                padding: 5px;
+            }
+
+            .nav-btn i {
+                font-size: 1.6rem;
+                margin-bottom: 5px;
+            }
+
+            .nav-btn span {
+                font-size: 0.8rem;
+            }
+
+            .mc-btn {
+                padding: 10px 20px;
+                font-size: 1rem;
+                margin: 5px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-5 {
+            animation-delay: 0.5s;
+        }
+
+        /* 工具类 */
+        .d-flex {
+            display: flex;
+        }
+
+        .justify-content-center {
+            justify-content: center;
+        }
+
+        .align-items-center {
+            align-items: center;
+        }
+
+        .gap-3 {
+            gap: 1rem;
+        }
+
+        .mt-5 {
+            margin-top: 3rem;
+        }
+
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 1.5rem;
+        }
+
+        .me-2 {
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+
+<body class="light-mode">
+    <!-- 粒子背景 -->
+    <canvas class="particles" id="particles"></canvas>
+
+    <!-- 顶部横栏 -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-container">
+                <!-- 服务器Logo -->
+                <div class="server-logo" onclick="window.location.href='index.html'">
+                    <div class="logo-img">
+                        <img src="./img/logo.webp"
+                            alt="Snow服务器Logo">
+                    </div>
+                    <div class="logo-text"><span>Snow </span>| 轻量&稳定</div>
+                </div>
+
+                <!-- 导航按钮 -->
+                <div class="nav-buttons">
+                    <!-- 主页按钮 -->
+                    <div class="nav-btn active" onclick="window.location.href='index.html'">
+                        <i class="fas fa-house"></i>
+                        <span>主页</span>
+                    </div>
+
+                    <div class="nav-btn" onclick="window.location.href='notice.html'">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>公告</span>
+                    </div>
+
+                    <div class="nav-btn" onclick="window.location.href='download.html'">
+                        <i class="fas fa-download"></i>
+                        <span>下载</span>
+                    </div>
+
+                    <div class="nav-btn" onclick="window.location.href='wiki.html'">
+                        <i class="fas fa-book"></i>
+                        <span>WIKI</span>
+                    </div>
+
+                    <div class="nav-btn" onclick="window.location.href='gallery.html'">
+                        <i class="fas fa-images"></i>
+                        <span>画廊</span>
+                    </div>
+
+                    <div class="nav-btn" onclick="window.location.href='thankful.html'">
+                        <i class="fas fa-hands-helping"></i>
+                        <span>鸣谢</span>
+                    </div>
+
+                    <div class="nav-btn" onclick="window.open('https://littleskin.cn/', '_blank')">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>皮肤站</span>
+                    </div>
+
+                    <!-- 主题切换按钮 -->
+                    <div class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 首页横幅轮播图 -->
+    <section id="home" class="hero-section">
+        <!-- 轮播图容器 -->
+        <div class="carousel-container" id="carouselContainer">
+            <!-- 轮播项由JS动态添加 -->
+        </div>
+
+        <!-- 轮播图遮罩层 -->
+        <div class="carousel-overlay"></div>
+
+        <!-- 轮播指示器 -->
+        <div class="carousel-indicators" id="carouselIndicators">
+            <!-- 指示器由JS动态添加 -->
+        </div>
+
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="animate"><span style="color: var(--mc-blue);">Snow </span>轻量&稳定<br><span
+                        style="color: var(--mc-blue);">Beta </span>阶段</h1>
+                <p class="animate delay-1">易用 | 性能 | 自由 | 稳定</p>
+
+                <div class="btn-container animate delay-2">
+                    <button class="mc-btn" onclick="navigateTo('wiki.html')">
+                        <i class="fas fa-book"></i>服务器WIKI
+                    </button>
+                    <button class="mc-btn secondary" onclick="navigateTo('download.html')">
+                        <i class="fas fa-download"></i>下载服务器官方客户端
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 玩法 -->
+    <section id="features" class="mc-section">
+        <div class="container">
+            <h2 class="section-title text-center animate">自由玩法</h2>
+
+            <div class="features-grid">
+                <div class="animate">
+                    <div class="mc-card">
+                        <i class="fas fa-line-chart feature-icon"></i>
+                        <h3>纯净生存</h3>
+                        <h4>Survival</h4>
+                        <p>原汁原味生存，佐以插件优化多人游戏体验</p>
+                        <div class="progress-section">
+                            <div class="progress-title">
+                                <span>运营中</span>
+                                <span><i class="fas fa-check-circle"></i></span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="animate delay-1">
+                    <div class="mc-card">
+                        <i class="fas fa-trash feature-icon"></i>
+                        <h3>食之空</h3>
+                        <h4>PoopSky</h4>
+                        <p>充满趣味的空岛生存，正在策划中......</p>
+                        <div class="progress-section">
+                            <div class="progress-title">
+                                <span>准备中</span>
+                                <span><i class="fas fa-spinner"></i></span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 20%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="animate delay-2">
+                    <div class="mc-card">
+                        <i class="fas fa-server feature-icon"></i>
+                        <h3>方块宝可梦</h3>
+                        <h4>Pixelmon</h4>
+                        <p>经典模组，趣味依旧</p>
+                        <div class="progress-section">
+                            <div class="progress-title">
+                                <span>暂时停服</span>
+                                <span><i class="fas fa-times-circle"></i></span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务端与客户端支持 -->
+    <section id="support" class="mc-section">
+        <div class="container">
+            <div class="support-section">
+                <h2 class="support-title animate">服务端与客户端支持</h2>
+
+                <h3 class="support-type animate">我们使用如下服务端 以丰富玩家的游戏体验</h3>
+                <div class="support-grid">
+                    <div class="support-item animate">
+                        <img src="./img/paper.png" width="75" height="75" alt="Paper">
+                        <h4>Paper</h4>
+                        <p>Spigot插件端下的一项分支</p>
+                        <p>更强的插件兼容性 性能再优化与稳定性</p>
+                        <a href="https://papermc.io/downloads/paper" class="support-link" target="_blank">访问官网</a>
+                    </div>
+
+                    <div class="support-item animate delay-2">
+                        <img src="./img/neoforge.png" width="75" height="75" alt="Neoforge">
+                        <h4>Neoforge</h4>
+                        <p>于旧Forge之后的新一世代</p>
+                        <p>模组兼容性 性能与稳定性大幅提升</p>
+                        <a href="https://neoforged.net" class="support-link" target="_blank">访问官网</a>
+                    </div>
+
+                    <div class="support-item animate delay-3">
+                        <img src="./img/youer.webp" width="75" height="75" alt="Youer">
+                        <h4>Youer</h4>
+                        <p>基于Neoforge & Paper混合服务端</p>
+                        <p>努力地将模组与插件同时运行带到玩家面前</p>
+                        <a href="https://www.mohistmc.cn/resources/youer" class="support-link" target="_blank">访问官网</a>
+                    </div>
+                </div>
+
+                <h3 class="support-type animate">我们使用如下客户端 以增强玩家的游戏性能</h3>
+                <div class="support-grid">
+                    <div class="support-item animate">
+                        <img src="./img/fabric.png" width="75" height="75" alt="Fabric">
+                        <h4>Fabric 客户端</h4>
+                        <p>注入加载式的模组加载器</p>
+                        <p>轻量与高性能 广泛的优化模组支持</p>
+                        <a href="https://fabricmc.net" class="support-link" target="_blank">访问官网</a>
+                    </div>
+
+                    <div class="support-item animate delay-1">
+                        <img src="./img/neoforge.png" width="75" height="75" alt="Neoforge">
+                        <h4>Neoforge 客户端</h4>
+                        <p>扩展型模组包的必备客户端</p>
+                        <p>推荐1.20.1及以前版本</p>
+                        <a href="https://neoforged.net" class="support-link" target="_blank">访问官网</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务端硬件支持 -->
+    <section id="hardware" class="mc-section">
+        <div class="container">
+            <h2 class="section-title text-center animate">服务器硬件支持</h2>
+
+            <div class="hardware-section animate">
+                <h3 class="hardware-title">充足的硬件性能 满足轻量多人需求</h3>
+
+                <div class="hardware-grid">
+                    <div class="hardware-item animate">
+                        <h4><i class="fas fa-microchip"></i> 处理器</h4>
+                        <p>型号: <span class="hardware-value">Intel 酷睿 i7-12650H</span></p>
+                        <p>核心: <span class="hardware-value">10核 / 16线程</span></p>
+                        <p>频率: <span class="hardware-value">最高 4.7GHz</span></p>
+                    </div>
+
+                    <div class="hardware-item animate delay-1">
+                        <h4><i class="fas fa-memory"></i> 内存</h4>
+                        <p>容量: <span class="hardware-value">总计 32GB</span></p>
+                        <p>通道: <span class="hardware-value">双通道高速交换</span></p>
+                        <p>频率: <span class="hardware-value">3200MHz</span></p>
+
+                    </div>
+
+                    <div class="hardware-item animate delay-2">
+                        <h4><i class="fas fa-hdd"></i> 存储</h4>
+                        <p>主要盘: <span class="hardware-value">256GB NVMe SSD</span></p>
+                        <p>次要盘: <span class="hardware-value">512GB NVMe SSD</span></p>
+                        <p>读写速度: <span class="hardware-value">3500MB/s</span></p>
+                    </div>
+
+                    <div class="hardware-item animate delay-3">
+                        <h4><i class="fas fa-wifi"></i> 网络</h4>
+                        <p>校内: <span class="hardware-value">千兆光纤局域网</span></p>
+                        <p>校外: <span class="hardware-value">全国多地址转发</span></p>
+                        <p>带宽: <span class="hardware-value">至高  百兆充足上行</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 加入方式 -->
+    <section id="join" class="mc-section">
+        <div class="container">
+            <h2 class="section-title text-center animate">服务器状态</h2>
+
+            <div class="server-cards">
+                <div class="animate">
+                    <div class="server-card">
+                        <h3 class="server-title">纯净生存</h3>
+                        <div class="server-badge">1.21.4 Java</div>
+                        <p class="lead">丰富插件的多彩生存体验</p>
+                        <p>更优化的生存，多样化的玩法</p>
+                        <div class="status-btn status-operating">运营中</div>
+                    </div>
+                </div>
+
+                <div class="animate delay-1">
+                    <div class="server-card">
+                        <h3 class="server-title">食之空</h3>
+                        <div class="server-badge">1.21.1 Fabric</div>
+                        <p class="lead">充满趣味的空岛生存</p>
+                        <p>探索新奇模组，感受社区的强大创造力</p>
+                        <div class="status-btn status-developing">准备中...</div>
+                    </div>
+                </div>
+
+                <div class="animate delay-2">
+                    <div class="server-card">
+                        <h3 class="server-title">方块宝可梦</h3>
+                        <div class="server-badge">1.21.1 Neoforge</div>
+                        <p class="lead">经典宝可梦模组包</p>
+                        <p>方可梦的世界,一切符合你对宝可梦的印象</p>
+                        <div class="status-btn status-developing">暂时停服</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center gap-3 mt-5 animate delay-1">
+                <button class="mc-btn" onclick="navigateTo('wiki.html')">
+                    <i class="fas fa-book me-2"></i>服务器WIKI
+                </button>
+                <button class="mc-btn secondary" onclick="showQQModal()">
+                    <i class="fas fa-users me-2"></i>加入服务器交流群
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="mc-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-snowflake floating" style="color: var(--mc-blue);"></i>
+                <h3 class="footer-title">Snow 服务器 | 轻量 & 稳定</h3>
+                <p class="footer-subtitle">最后更新: <span id="updateDate">2025年6月21日</span></p>
+            </div>
+
+            <div class="footer-links">
+                <a href="index.html" class="footer-link">
+                    <i class="fas fa-home"></i> 首页
+                </a>
+                <a href="download.html" class="footer-link">
+                    <i class="fas fa-download"></i> 客户端下载
+                </a>
+                <a href="wiki.html" class="footer-link">
+                    <i class="fas fa-book"></i> 服务器WIKI
+                </a>
+                <a href="gallery.html" class="footer-link">
+                    <i class="fas fa-images"></i> 玩家画廊
+                </a>
+                <a href="https://littleskin.cn" class="footer-link" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> LittleSkin皮肤站
+                </a>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <p class="copyright">
+                &copy; © 2025 Snow 轻量稳定服 | Beta测试阶段
+            </p>
+        </div>
+    </footer>
+
+    <!-- QQ群二维码模态框 -->
+    <div class="modal-overlay" id="qqModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeQQModal()">&times;</span>
+            <div class="placeholder-image"
+                style="width: 300px; height: 300px; background: none; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                <img src="./img/code.jpg" alt="QQ群二维码"
+                    style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 页面导航函数 - 在当前页面切换
+        function navigateTo(page) {
+            if (page === 'index.html') {
+                // 如果是主页，重新加载当前页
+                window.location.href = 'index.html';
+            } else {
+                // 其他页面在当前窗口打开
+                window.location.href = page;
+            }
+        }
+
+        // 轮播图功能
+        function initCarousel() {
+            const carouselContainer = document.getElementById('carouselContainer');
+            const indicatorsContainer = document.getElementById('carouselIndicators');
+
+            // 创建8个轮播项
+            for (let i = 1; i <= 8; i++) {
+                const item = document.createElement('div');
+                item.className = 'carousel-item';
+                if (i === 1) item.classList.add('active');
+                item.style.backgroundImage = `url('./img/${i}.png')`;
+                carouselContainer.appendChild(item);
+
+                // 创建指示器
+                const indicator = document.createElement('div');
+                indicator.className = 'carousel-indicator';
+                if (i === 1) indicator.classList.add('active');
+                indicator.dataset.index = i - 1;
+                indicator.addEventListener('click', () => {
+                    setActiveSlide(i - 1);
+                });
+                indicatorsContainer.appendChild(indicator);
+            }
+
+            let currentSlide = 0;
+
+            // 设置活动幻灯片
+            function setActiveSlide(index) {
+                // 移除所有活动类
+                const slides = document.querySelectorAll('.carousel-item');
+                const indicators = document.querySelectorAll('.carousel-indicator');
+
+                slides.forEach(slide => slide.classList.remove('active'));
+                indicators.forEach(ind => ind.classList.remove('active'));
+
+                // 设置新活动项
+                slides[index].classList.add('active');
+                indicators[index].classList.add('active');
+
+                currentSlide = index;
+            }
+
+            // 自动轮播
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % 8;
+                setActiveSlide(currentSlide);
+            }
+
+            // 每5秒切换一次
+            setInterval(nextSlide, 5000);
+        }
+
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const themeIcon = themeToggle.querySelector('i');
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+
+            if (body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+
+            // 重新初始化粒子效果以适应主题
+            initParticles();
+        });
+
+        // 初始化主题
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        }
+
+        // QQ群二维码显示
+        function showQQModal() {
+            document.getElementById('qqModal').classList.add('active');
+        }
+
+        function closeQQModal() {
+            document.getElementById('qqModal').classList.remove('active');
+        }
+
+        // 点击模态框外部关闭
+        document.getElementById('qqModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeQQModal();
+            }
+        });
+
+        // 粒子背景效果
+        function initParticles() {
+            const canvas = document.getElementById('particles');
+            const ctx = canvas.getContext('2d');
+
+            // 设置canvas尺寸
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            // 粒子类
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 3 + 1;
+                    this.speedX = Math.random() * 1 - 0.5;
+                    this.speedY = Math.random() * 1 - 0.5;
+                    this.color = body.classList.contains('dark-mode') ?
+                        `rgba(45, 140, 255, ${Math.random() * 0.4})` :
+                        `rgba(45, 140, 255, ${Math.random() * 0.2})`;
+                }
+
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+
+                    if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+                    if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+                }
+
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            // 创建粒子
+            const particles = [];
+            const particleCount = Math.floor(canvas.width * canvas.height / 10000);
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            // 动画循环
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+
+                    // 绘制粒子间的连线
+                    for (let j = i; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = body.classList.contains('dark-mode') ?
+                                `rgba(59, 133, 38, ${0.2 * (1 - distance / 100)})` :
+                                `rgba(59, 133, 38, ${0.1 * (1 - distance / 100)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                requestAnimationFrame(animateParticles);
+            }
+
+            animateParticles();
+        }
+
+        // 动画效果
+        function initAnimations() {
+            const animateElements = document.querySelectorAll('.animate');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.visibility = 'visible';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            animateElements.forEach(el => {
+                el.style.opacity = 0;
+                el.style.visibility = 'hidden';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        }
+
+        // 页面加载时设置
+        document.addEventListener('DOMContentLoaded', function () {
+            initTheme();
+            initParticles();
+            initAnimations();
+            initCarousel(); // 初始化轮播图
+
+        });
+    </script>
+</body>
+
+</html>

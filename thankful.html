@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snow多元综合服 | 鸣谢</title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.cnpmjs.org/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --mc-blue: #2d8cff;
+            --mc-green: #3b8526;
+            --mc-gold: #ffcc00;
+            --mc-text: #333;
+            --mc-card: #ffffff;
+            --mc-shadow: rgba(0, 0, 0, 0.1);
+            --mc-border: #e0e0e0;
+            --mc-snow: #e0f7fa;
+            --mc-primary: #2d8cff;
+            --mc-secondary: #3b8526;
+            --mc-dark: #1a1a2e;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f8ff 0%, var(--mc-snow) 100%);
+            font-family: 'Noto Sans SC', 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            color: var(--mc-text);
+            position: relative;
+            min-height: 100vh;
+            transition: all 0.4s ease;
+            overflow-x: hidden;
+        }
+
+        .dark-mode {
+            --mc-text: #f0f0f0;
+            --mc-card: #1a1a2e;
+            --mc-shadow: rgba(0, 0, 0, 0.5);
+            --mc-border: #444;
+            --mc-snow: #0c1d28;
+            background: linear-gradient(135deg, #0c1d28 0%, #1a1a1a 100%);
+        }
+
+        /* 顶部横栏 */
+        .top-bar {
+            background: var(--mc-card);
+            padding: 15px 0;
+            border-bottom: 3px solid var(--mc-blue);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 12px var(--mc-shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .top-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 服务器Logo */
+        .server-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .server-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(45, 140, 255, 0.4);
+            overflow: hidden;
+        }
+
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--mc-text);
+            font-family: 'Noto Sans SC', sans-serif;
+            position: relative;
+        }
+
+        .logo-text span {
+            color: var(--mc-blue);
+            position: relative;
+        }
+
+        .logo-text span::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--mc-green);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-text:hover span::after {
+            transform: scaleX(1);
+        }
+
+        /* 导航按钮 */
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-btn {
+            width: 90px;
+            height: 90px;
+            background: var(--mc-card);
+            border: 2px solid var(--mc-border);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            padding: 8px;
+            box-shadow: 0 4px 8px var(--mc-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: rgba(45, 140, 255, 0.1);
+            transition: height 0.3s ease;
+            z-index: 1;
+        }
+
+        .nav-btn:hover::before {
+            height: 100%;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px);
+            border-color: var(--mc-blue);
+            box-shadow: 0 8px 16px var(--mc-shadow);
+        }
+
+        .nav-btn i {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: var(--mc-blue);
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-btn span {
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: var(--mc-text);
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-btn.active {
+            border-color: var(--mc-blue);
+            background: rgba(45, 140, 255, 0.1);
+        }
+
+        /* 主题切换按钮 */
+        .theme-toggle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--mc-card);
+            border: 2px solid var(--mc-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-left: 10px;
+            box-shadow: 0 4px 8px var(--mc-shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(15deg);
+            border-color: var(--mc-blue);
+        }
+
+        /* 鸣谢内容 */
+        .thankful-container {
+            max-width: 1400px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .thankful-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .thankful-title {
+            font-size: 2.8rem;
+            color: var(--mc-blue);
+            margin-bottom: 15px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .thankful-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--mc-green);
+            border-radius: 2px;
+        }
+
+        .thankful-subtitle {
+            font-size: 1.2rem;
+            color: var(--mc-text);
+            max-width: 800px;
+            margin: 25px auto 0;
+            line-height: 1.7;
+        }
+
+        /* 鸣谢分类 */
+        .category-section {
+            margin-bottom: 60px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--mc-blue);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            color: var(--mc-blue);
+        }
+
+        .category-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--mc-text);
+            margin: 0;
+        }
+
+        /* 鸣谢卡片网格 */
+        .thankful-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .thankful-card {
+            background: var(--mc-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--mc-border);
+            box-shadow: 0 6px 12px var(--mc-shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .thankful-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .thankful-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .thankful-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .thankful-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .thankful-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .thankful-card:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        .thankful-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--mc-shadow);
+            border-color: var(--mc-blue);
+        }
+
+        .card-header {
+            background: var(--mc-blue);
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--mc-blue);
+        }
+
+        .card-title {
+            flex: 1;
+        }
+
+        .card-name {
+            font-size: 1.5rem;
+            color: white;
+            margin: 0 0 5px;
+            font-weight: 700;
+        }
+
+        .card-category {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1rem;
+        }
+
+        .card-body {
+            padding: 25px;
+            flex-grow: 1;
+        }
+
+        .card-description {
+            color: var(--mc-text);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .card-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--mc-green);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .card-link:hover {
+            background: #2a6c1b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-link i {
+            margin-right: 8px;
+        }
+
+        /* 特别鸣谢 */
+        .special-thanks {
+            background: linear-gradient(135deg, var(--mc-blue), #1a73e8);
+            border-radius: 12px;
+            padding: 50px;
+            margin: 60px 0;
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .special-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .special-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .contributor-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .contributor {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 20px;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+
+        .contributor:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+
+        /* 页脚 - 已修改为完全居中 */
+        .mc-footer {
+            background: var(--mc-card);
+            border-top: 3px solid var(--mc-border);
+            padding: 3rem 0;
+            box-shadow: 0 -4px 12px var(--mc-shadow);
+        }
+
+        .footer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo i {
+            color: var(--mc-blue);
+            font-size: 1.8rem;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--mc-text);
+            margin: 0;
+        }
+
+        .footer-divider {
+            width: 80%;
+            max-width: 400px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--mc-blue), transparent);
+            margin: 25px 0;
+        }
+
+        .footer-text {
+            color: var(--mc-text);
+            margin: 5px 0;
+            line-height: 1.6;
+        }
+
+        .footer-copyright {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: var(--mc-text);
+            opacity: 0.8;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 1200px) {
+            .thankful-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-btn {
+                width: 80px;
+                height: 80px;
+            }
+
+            .nav-btn i {
+                font-size: 1.8rem;
+            }
+
+            .nav-btn span {
+                font-size: 0.85rem;
+            }
+
+            .special-thanks {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .server-logo {
+                justify-content: center;
+            }
+
+            .nav-buttons {
+                justify-content: center;
+            }
+
+            .thankful-title {
+                font-size: 2.2rem;
+            }
+
+            .category-title {
+                font-size: 1.8rem;
+            }
+
+            .thankful-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-btn {
+                width: 70px;
+                height: 70px;
+                padding: 5px;
+            }
+
+            .nav-btn i {
+                font-size: 1.6rem;
+                margin-bottom: 5px;
+            }
+
+            .nav-btn span {
+                font-size: 0.8rem;
+            }
+
+            .card-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .special-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* 粒子背景 */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* 装饰元素 */
+        .decor-circle {
+            position: absolute;
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .circle-1 {
+            width: 250px;
+            height: 250px;
+            background: var(--mc-blue);
+            top: 10%;
+            left: 5%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .circle-2 {
+            width: 180px;
+            height: 180px;
+            background: var(--mc-green);
+            bottom: 15%;
+            right: 7%;
+            animation: float 7s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="light-mode">
+    <!-- 粒子背景 -->
+    <canvas class="particles" id="particles"></canvas>
+
+    <!-- 装饰元素 -->
+    <div class="decor-circle circle-1"></div>
+    <div class="decor-circle circle-2"></div>
+
+    <!-- 顶部横栏 -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-container">
+                <!-- 服务器Logo -->
+                <div class="server-logo" onclick="window.location.href='index.html'">
+                    <div class="logo-img">
+                        <img src="./img/logo.webp"
+                            alt="Snow服务器Logo">
+                    </div>
+                    <div class="logo-text"><span>Snow </span>| 轻量&稳定</div>
+                </div>
+
+                <!-- 导航按钮 -->
+                <div class="nav-buttons">
+                    <!-- 主页按钮 -->
+                    <div class="nav-btn" onclick="window.location.href='index.html'">
+                        <i class="fas fa-house"></i>
+                        <span>主页</span>
+                    </div>
+
+                    <div class="nav-btn" onclick="window.location.href='notice.html'">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>公告</span>
+                    </div>
+
+                    <div class="nav-btn" onclick="window.location.href='download.html'">
+                        <i class="fas fa-download"></i>
+                        <span>下载</span>
+                    </div>
+
+                    <div class="nav-btn" onclick="window.location.href='wiki.html'">
+                        <i class="fas fa-book"></i>
+                        <span>WIKI</span>
+                    </div>
+
+                    <div class="nav-btn" onclick="window.location.href='gallery.html'">
+                        <i class="fas fa-images"></i>
+                        <span>画廊</span>
+                    </div>
+
+                    <div class="nav-btn active" onclick="window.location.href='thankful.html'">
+                        <i class="fas fa-hands-helping"></i>
+                        <span>鸣谢</span>
+                    </div>
+
+                    <div class="nav-btn" onclick="window.open('https://littleskin.cn/', '_blank')">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>皮肤站</span>
+                    </div>
+
+                    <!-- 主题切换按钮 -->
+                    <div class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 鸣谢内容 -->
+    <div class="thankful-container">
+        <div class="thankful-header">
+            <h1 class="thankful-title">特别鸣谢</h1>
+            <p class="thankful-subtitle">Snow服务器的稳定运行离不开以下优秀项目和开发者的付出。没有他们就没有Snow服务器的正常开放，我们在此对他们表示诚挚的谢意！</p>
+        </div>
+
+        <!-- 服务器核心 -->
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-icon">
+                    <i class="fas fa-server"></i>
+                </div>
+                <h2 class="category-title">服务器核心</h2>
+            </div>
+
+            <div class="thankful-grid">
+                <div class="thankful-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="./img/paper.png" width="75" height="75" alt="Paper">
+                        </div>
+                        <div class="card-title">
+                            <h3 class="card-name">PaperMC</h3>
+                            <p class="card-category">插件服务端核心</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">高性能、稳定的Minecraft插件服务端，具有海量的插件支持，是我们插件服的主要运行核心。</p>
+                        <a href="https://www.papermc.io" class="card-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> 访问官网
+                        </a>
+                    </div>
+                </div>
+                <div class="thankful-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="./img/neoforge.png" width="75" height="75" alt="Neoforge">
+                        </div>
+                        <div class="card-title">
+                            <h3 class="card-name">Neoforge</h3>
+                            <p class="card-category">模组服务端核心</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">新版本的模组服务端核心，兼容海量的社区模组，是我们模组服的主要运行核心。</p>
+                        <a href="https://www.neoforged.net" class="card-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> 访问官网
+                        </a>
+                    </div>
+                </div>
+
+                <div class="thankful-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="./img/youer.webp" width="75" height="75" alt="Youer">
+                        </div>
+                        <div class="card-title">
+                            <h3 class="card-name">Youer</h3>
+                            <p class="card-category">混合服务端核心</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">同时支持Neoforge和Paper的混合服务端核心，拓展更多的游戏可能。</p>
+                        <a href="https://www.youer.net" class="card-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> 访问官网
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 插件与模组源 -->
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-icon">
+                    <i class="fas fa-puzzle-piece"></i>
+                </div>
+                <h2 class="category-title">插件与模组源</h2>
+            </div>
+
+            <div class="thankful-grid">
+                <div class="thankful-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="./img/curseforge.jpg" width="75" height="75" alt="CurseForge">
+                        </div>
+                        <div class="card-title">
+                            <h3 class="card-name">CurseForge</h3>
+                            <p class="card-category">最大量的模组下载源网站之一</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">最长久历史的Minecraft模组下载网站之一，提供超过50万个模组的下载资源。</p>
+                        <a href="https://www.curseforge.com/" class="card-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> 访问官网
+                        </a>
+                    </div>
+                </div>
+
+                <div class="thankful-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="./img/Modrinth.jpg" width="75" height="75" alt="Modrinth">
+                        </div>
+                        <div class="card-title">
+                            <h3 class="card-name">Modrinth</h3>
+                            <p class="card-category">丰富多样的Minecraft资源站</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">逐步兴起的Minecraft资源站，提供丰富的模组插件纹理包光影包等各种下载资源。</p>
+                        <a href="https://www.modrinth.com/" class="card-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> 访问官网
+                        </a>
+                    </div>
+                </div>
+
+                <div class="thankful-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="./img/spigot.png" width="75" height="75" alt="spigot">
+                        </div>
+                        <div class="card-title">
+                            <h3 class="card-name">Spigot</h3>
+                            <p class="card-category">海量插件的老牌资源论坛</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">历久而弥新的插件资源论坛，是全球最多的插件下载资源站之一。</p>
+                        <a href="https://www.spigotmc.org/" class="card-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> 访问官网
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 运营工具 -->
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h2 class="category-title">运营工具</h2>
+            </div>
+
+            <div class="thankful-grid">
+                <div class="thankful-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="./img/vscode.png" width="50" height="50" alt="Visual Studio Code">
+                        </div>
+                        <div class="card-title">
+                            <h3 class="card-name">Visual Studio Code</h3>
+                            <p class="card-category">代码编辑器</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">轻量级但功能强大的代码编辑器，用于网站开发和配置文件编辑。</p>
+                        <a href="https://code.visualstudio.com" class="card-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> 访问官网
+                        </a>
+                    </div>
+                </div>
+
+                <div class="thankful-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="./img/mysql.png" width="75" height="75" alt="MYSQL">
+                        </div>
+                        <div class="card-title">
+                            <h3 class="card-name">MYSQL</h3>
+                            <p class="card-category">数据库</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">关系型数据库管理系统，用于存储玩家数据、经济系统和领地信息等。</p>
+                        <a href="https://www.mysql.com" class="card-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> 访问官网
+                        </a>
+                    </div>
+                </div>
+
+                <div class="thankful-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="./img/apache.png" width="60" height="60" alt="Apache">
+                        </div>
+                        <div class="card-title">
+                            <h3 class="card-name">Apache</h3>
+                            <p class="card-category">网站运营</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">便捷的网站运行服务，用于部署网站和提供网站连接。</p>
+                        <a href="https://www.apache.org" class="card-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> 访问官网
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 基础设施 -->
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-icon">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <h2 class="category-title">基础设施</h2>
+            </div>
+
+            <div class="thankful-grid">
+                <div class="thankful-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="./img/java.png" width="50" height="50" alt="Java">
+                        </div>
+                        <div class="card-title">
+                            <h3 class="card-name">Java</h3>
+                            <p class="card-category">编程语言</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">Java是Minecraft服务器的核心运行环境，提供了强大的跨平台能力和高性能的运行环境。</p>
+                        <a href="https://www.java.com" class="card-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> 访问官网
+                        </a>
+                    </div>
+                    </a>
+                </div>
+                <div class="thankful-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="./img/file.png" width="75" height="75" alt="YAML">
+                        </div>
+                        <div class="card-title">
+                            <h3 class="card-name">YAML</h3>
+                            <p class="card-category">编程语言</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">YAML是一种标记的编程语言，用于存储大量的服务器配置文件。</p>
+                        <a href="https://yaml.org" class="card-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> 访问官网
+                        </a>
+                    </div>
+                </div>
+                <div class="thankful-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="./img/ubuntu.png" width="50" height="50" alt="Ubuntu">
+                        </div>
+                        <div class="card-title">
+                            <h3 class="card-name">Ubuntu</h3>
+                            <p class="card-category">操作系统</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">Ubuntu是我们服务器的操作系统，提供了强大的服务器性能和稳定性。</p>
+                        <a href="https://ubuntu.com" class="card-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> 访问官网
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 特别鸣谢 -->
+    <!-- <div class="special-thanks">
+            <h2 class="special-title">
+                <i class="fas fa-heart"></i> 
+                特别感谢
+            </h2>
+            <p class="special-content">
+                我们衷心感谢所有为Snow服务器做出贡献的玩家、开发者和社区成员。特别感谢以下人员在服务器开发、维护和社区建设中的卓越贡献：
+            </p>
+            <div class="contributor-list">
+                <div class="contributor">技术总监: Player_Dev</div>
+                <div class="contributor">建筑指导: Master_Builder</div>
+                <div class="contributor">插件开发: Code_Wizard</div>
+                <div class="contributor">社区管理: Snow_Angel</div>
+                <div class="contributor">活动策划: Event_Master</div>
+                <div class="contributor">新手导师: Mentor_Guide</div>
+            </div>
+        </div>  -->
+
+    <!-- 结语 -->
+    <div class="text-center mt-5 mb-5">
+        <div class="info-card"
+            style="background: rgba(45, 140, 255, 0.05); border-radius: 12px; padding: 30px; border-left: 4px solid var(--mc-blue);">
+            <h3 style="font-size: 1.8rem; color: var(--mc-blue); margin-bottom: 20px;">
+                <i class="fas fa-hands-helping me-2"></i> 感恩同行
+            </h3>
+            <p style="font-size: 1.1rem; line-height: 1.8; max-width: 800px; margin: 0 auto;">
+                Snow服务器的每一次进步都离不开Minecraft庞大社区的支持。我们怀着感恩之心，感谢所有来自社区的贡献。未来，我们将继续努力，打造更加优质的游戏体验，回馈所有支持我们的玩家们！
+            </p>
+        </div>
+    </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="mc-footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <i class="fas fa-snowflake"></i>
+                <h3 class="footer-title">Snow 服务器 | 鸣谢页面</h3>
+            </div>
+
+            <p class="footer-text">最后更新: 2025年6月21日</p>
+
+            <div class="footer-divider"></div>
+
+            <p class="footer-text"><i class="fas fa-hand-holding-heart" style="color: var(--mc-blue);"></i> 感谢每一份支持与贡献</p>
+
+            <p class="footer-copyright">
+                © 2025 Snow 轻量稳定服 | Beta测试阶段
+            </p>
+        </div>
+    </footer>
+
+    <!-- 使用Bootstrap国内CDN -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const themeIcon = themeToggle.querySelector('i');
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+
+            if (body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+
+            // 重新初始化粒子效果以适应主题
+            initParticles();
+        });
+
+        // 初始化主题
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        }
+
+        // 粒子背景效果
+        function initParticles() {
+            const canvas = document.getElementById('particles');
+            const ctx = canvas.getContext('2d');
+
+            // 设置canvas尺寸
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            // 粒子类
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 3 + 1;
+                    this.speedX = Math.random() * 1 - 0.5;
+                    this.speedY = Math.random() * 1 - 0.5;
+                    this.color = body.classList.contains('dark-mode') ?
+                        `rgba(45, 140, 255, ${Math.random() * 0.4})` :
+                        `rgba(45, 140, 255, ${Math.random() * 0.2})`;
+                }
+
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+
+                    if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+                    if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+                }
+
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            // 创建粒子
+            const particles = [];
+            const particleCount = Math.floor(canvas.width * canvas.height / 10000);
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            // 动画循环
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+
+                    // 绘制粒子间的连线
+                    for (let j = i; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = body.classList.contains('dark-mode') ?
+                                `rgba(59, 133, 38, ${0.2 * (1 - distance / 100)})` :
+                                `rgba(59, 133, 38, ${0.1 * (1 - distance / 100)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                requestAnimationFrame(animateParticles);
+            }
+
+            animateParticles();
+        }
+
+        // 页面加载时设置
+        document.addEventListener('DOMContentLoaded', function () {
+            initTheme();
+            initParticles();
+        });
+    </script>
+</body>
+
+</html>

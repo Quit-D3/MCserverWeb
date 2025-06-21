@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snow多元综合服 | 下载</title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.cnpmjs.org/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --mc-blue: #2d8cff;
+            --mc-green: #3b8526;
+            --mc-gold: #ffcc00;
+            --mc-text: #333;
+            --mc-card: #ffffff;
+            --mc-shadow: rgba(0, 0, 0, 0.1);
+            --mc-border: #e0e0e0;
+            --mc-snow: #e0f7fa;
+            --mc-primary: #2d8cff;
+            --mc-secondary: #3b8526;
+            --mc-dark: #1a1a2e;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f8ff 0%, var(--mc-snow) 100%);
+            font-family: 'Noto Sans SC', 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            color: var(--mc-text);
+            position: relative;
+            min-height: 100vh;
+            transition: all 0.4s ease;
+            overflow-x: hidden;
+        }
+
+        .dark-mode {
+            --mc-text: #f0f0f0;
+            --mc-card: #1a1a2e;
+            --mc-shadow: rgba(0, 0, 0, 0.5);
+            --mc-border: #444;
+            --mc-snow: #0c1d28;
+            background: linear-gradient(135deg, #0c1d28 0%, #1a1a1a 100%);
+        }
+
+        /* 顶部横栏 */
+        .top-bar {
+            background: var(--mc-card);
+            padding: 15px 0;
+            border-bottom: 3px solid var(--mc-blue);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 12px var(--mc-shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .top-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 服务器Logo */
+        .server-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .server-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(45, 140, 255, 0.4);
+            overflow: hidden;
+        }
+
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--mc-text);
+            font-family: 'Noto Sans SC', sans-serif;
+            position: relative;
+        }
+
+        .logo-text span {
+            color: var(--mc-blue);
+            position: relative;
+        }
+
+        .logo-text span::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--mc-green);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-text:hover span::after {
+            transform: scaleX(1);
+        }
+
+        /* 导航按钮 */
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-btn {
+            width: 90px;
+            height: 90px;
+            background: var(--mc-card);
+            border: 2px solid var(--mc-border);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            padding: 8px;
+            box-shadow: 0 4px 8px var(--mc-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: rgba(45, 140, 255, 0.1);
+            transition: height 0.3s ease;
+            z-index: 1;
+        }
+
+        .nav-btn:hover::before {
+            height: 100%;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px);
+            border-color: var(--mc-blue);
+            box-shadow: 0 8px 16px var(--mc-shadow);
+        }
+
+        .nav-btn i {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: var(--mc-blue);
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-btn span {
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: var(--mc-text);
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-btn.active {
+            border-color: var(--mc-blue);
+            background: rgba(45, 140, 255, 0.1);
+        }
+
+        /* 主题切换按钮 */
+        .theme-toggle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--mc-card);
+            border: 2px solid var(--mc-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-left: 10px;
+            box-shadow: 0 4px 8px var(--mc-shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(15deg);
+            border-color: var(--mc-blue);
+        }
+
+        /* 下载中心内容 */
+        .download-container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .download-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .download-title {
+            font-size: 2.8rem;
+            color: var(--mc-blue);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .download-subtitle {
+            font-size: 1.2rem;
+            color: var(--mc-text);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* 筛选区域 */
+        .filter-section {
+            background: var(--mc-card);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 2px solid var(--mc-border);
+            box-shadow: 0 6px 12px var(--mc-shadow);
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .filter-group {
+            margin-bottom: 15px;
+        }
+
+        .filter-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--mc-text);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--mc-border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: var(--mc-card);
+            color: var(--mc-text);
+        }
+
+        .search-input:focus {
+            border-color: var(--mc-blue);
+            box-shadow: 0 0 0 3px rgba(45, 140, 255, 0.2);
+            outline: none;
+        }
+
+        .version-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--mc-border);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--mc-card);
+            color: var(--mc-text);
+            appearance: none;
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 15px;
+        }
+
+        .version-select:focus {
+            border-color: var(--mc-blue);
+            box-shadow: 0 0 0 3px rgba(45, 140, 255, 0.2);
+            outline: none;
+        }
+
+        /* 客户端卡片 */
+        .client-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .client-card {
+            background: var(--mc-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--mc-border);
+            box-shadow: 0 6px 12px var(--mc-shadow);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .client-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px var(--mc-shadow);
+            border-color: var(--mc-blue);
+        }
+
+        .client-header {
+            background: var(--mc-blue);
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .client-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .client-version {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .client-body {
+            padding: 25px;
+            flex-grow: 1;
+        }
+
+        .client-description {
+            color: var(--mc-text);
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .client-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            color: var(--mc-text);
+        }
+
+        .client-download-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: var(--mc-green);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .client-download-btn:hover {
+            background: #2a6c1b;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .client-download-btn i {
+            margin-right: 8px;
+        }
+
+        /* 页脚 - 已修改为完全居中 */
+        .mc-footer {
+            background: var(--mc-card);
+            border-top: 3px solid var(--mc-border);
+            padding: 3rem 0;
+            box-shadow: 0 -4px 12px var(--mc-shadow);
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo i {
+            color: var(--mc-blue);
+            font-size: 1.8rem;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--mc-text);
+            margin: 0;
+        }
+
+        .footer-divider {
+            width: 80%;
+            max-width: 400px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--mc-blue), transparent);
+            margin: 25px 0;
+        }
+
+        .footer-text {
+            color: var(--mc-text);
+            margin: 5px 0;
+            line-height: 1.6;
+        }
+
+        .footer-copyright {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: var(--mc-text);
+            opacity: 0.8;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 1200px) {
+            .client-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-btn {
+                width: 80px;
+                height: 80px;
+            }
+
+            .nav-btn i {
+                font-size: 1.8rem;
+            }
+
+            .nav-btn span {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .server-logo {
+                justify-content: center;
+            }
+
+            .nav-buttons {
+                justify-content: center;
+            }
+
+            .download-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-btn {
+                width: 70px;
+                height: 70px;
+                padding: 5px;
+            }
+
+            .nav-btn i {
+                font-size: 1.6rem;
+                margin-bottom: 5px;
+            }
+
+            .nav-btn span {
+                font-size: 0.8rem;
+            }
+
+            .client-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 50px;
+            background: var(--mc-card);
+            border-radius: 12px;
+            border: 2px dashed var(--mc-border);
+            margin-top: 20px;
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            color: var(--mc-blue);
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body class="light-mode">
+    <!-- 顶部横栏 -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-container">
+                <!-- 服务器Logo -->
+                <div class="server-logo" onclick="window.location.href='index.html'">
+                    <div class="logo-img">
+                        <img src="./img/logo.webp"
+                            alt="Snow服务器Logo">
+                    </div>
+                    <div class="logo-text"><span>Snow </span>| 轻量&稳定</div>
+                </div>
+
+                <!-- 导航按钮 -->
+                <div class="nav-buttons">
+                    <!-- 主页按钮 -->
+                    <div class="nav-btn" onclick="window.location.href='index.html'">
+                        <i class="fas fa-house"></i>
+                        <span>主页</span>
+                    </div>
+
+                    <div class="nav-btn" onclick="window.location.href='notice.html'">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>公告</span>
+                    </div>
+
+                    <div class="nav-btn active" onclick="window.location.href='download.html'">
+                        <i class="fas fa-download"></i>
+                        <span>下载</span>
+                    </div>
+
+                    <div class="nav-btn" onclick="window.location.href='wiki.html'">
+                        <i class="fas fa-book"></i>
+                        <span>WIKI</span>
+                    </div>
+
+                    <div class="nav-btn" onclick="window.location.href='gallery.html'">
+                        <i class="fas fa-images"></i>
+                        <span>画廊</span>
+                    </div>
+
+                    <div class="nav-btn" onclick="window.location.href='thankful.html'">
+                        <i class="fas fa-hands-helping"></i>
+                        <span>鸣谢</span>
+                    </div>
+
+                    <div class="nav-btn" onclick="window.open('https://littleskin.cn/', '_blank')">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>皮肤站</span>
+                    </div>
+
+                    <!-- 主题切换按钮 -->
+                    <div class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 下载中心内容 -->
+    <div class="download-container">
+        <div class="download-header animate">
+            <h1 class="download-title">服务器客户端下载中心</h1>
+            <p class="download-subtitle">选择适合您游戏需求的客户端版本，一键下载，快速加入Snow服务器</p>
+        </div>
+
+        <!-- 筛选区域 -->
+        <div class="filter-section animate">
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label for="searchInput" class="filter-label">
+                        <i class="fas fa-search"></i> 搜索客户端
+                    </label>
+                    <input type="text" id="searchInput" class="search-input" placeholder="输入客户端名称或关键词...">
+                </div>
+
+                <div class="filter-group">
+                    <label for="versionFilter" class="filter-label">
+                        <i class="fas fa-filter"></i> 筛选游戏版本
+                    </label>
+                    <select id="versionFilter" class="version-select">
+                        <option value="all">所有版本</option>
+                        <option value="1.21.1 Fabric">1.21.1 Fabric</option>
+                        <option value="1.21.1 Neoforge">1.21.1 Neoforge</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="categoryFilter" class="filter-label">
+                        <i class="fas fa-server"></i> 筛选服务器
+                    </label>
+                    <select id="categoryFilter" class="version-select">
+                        <option value="all">所有类别</option>
+                        <option value="survival">纯净生存</option>
+                        <option value="poopsky">食之空</option>
+                        <option value="pixelmon">方块宝可梦</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- 客户端列表 -->
+        <div class="client-grid" id="clientList">
+            <!-- 客户端卡片将通过JavaScript动态生成 -->
+        </div>
+
+        <!-- 无结果提示 -->
+        <div class="no-results" id="noResults" style="display: none;">
+            <i class="fas fa-exclamation-circle"></i>
+            <h3>没有找到匹配的客户端</h3>
+            <p>请尝试其他搜索关键词或筛选条件</p>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="mc-footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <i class="fas fa-snowflake"></i>
+                <h3 class="footer-title">Snow 服务器 | 客户端下载中心</h3>
+            </div>
+
+            <p class="footer-text">最后更新: 2025年6月21日</p>
+
+            <div class="footer-divider"></div>
+
+            <p class="footer-text"><i class="fas fa-heart" style="color: #fa1900;"></i> 用心为用户提供至高体验的客户端</p>
+
+            <p class="footer-copyright">
+                &copy; © 2025 Snow 轻量稳定服 | Beta测试阶段
+            </p>
+        </div>
+    </footer>
+
+    <!-- 使用Bootstrap国内CDN -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const themeIcon = themeToggle.querySelector('i');
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+
+            if (body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // 初始化主题
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        }
+
+        // 客户端数据
+        const clients = [
+            {
+                id: 1,
+                name: "[纯净生存]ver.1.3",
+                version: "1.21.1 Fabric",
+                description: "专为纯净生存服务器设计，包含大量优化操作体验的模组，提供极高的性能和极好的游戏体验<br><strong>推荐使用此客户端进入游戏</strong>",
+                category: "survival",
+                size: "101MB",
+                downloads: 14,
+                updated: "2025-06-15"
+            },
+            {
+                id: 2,
+                name: "[食之空]ver.---",
+                version: "1.21.1 Fabric",
+                description: "[暂未开放下载]Poopsky空岛生存服务器专用客户端，由来源整合包加以优化。<br><strong>来源整合包：</strong><a href='https://www.mcmod.cn/modpack/1105.html' target='_blank'>源整合包MC百科页面</a>",
+                category: "poopsky",
+                size: "---",
+                downloads: 0,
+                updated: "----------"
+            },
+            {
+                id: 3,
+                name: "[方块宝可梦]ver.1.0",
+                version: "1.21.1 Neoforge",
+                description: "[暂未开放下载]方块宝可梦服务器专用客户端，由来源整合包加以优化。<br><strong>来源整合包：</strong><a href='https://modrinth.com/modpack/the-pixelmon-modpack' target='_blank'>源整合包Modrinth页面</a>",
+                category: "pixelmon",
+                size: "---",
+                downloads: 0,
+                updated: "----------"
+            }
+        ];
+
+        // 渲染客户端列表
+        function renderClients(clientsToRender) {
+            const clientList = document.getElementById('clientList');
+            const noResults = document.getElementById('noResults');
+
+            // 清空当前列表
+            clientList.innerHTML = '';
+
+            if (clientsToRender.length === 0) {
+                noResults.style.display = 'block';
+                return;
+            }
+
+            noResults.style.display = 'none';
+
+            clientsToRender.forEach(client => {
+                const card = document.createElement('div');
+                card.className = 'client-card animate';
+                card.innerHTML = `
+                    <div class="client-header">
+                        <h3 class="client-name">${client.name}</h3>
+                        <div class="client-version">${client.version}</div>
+                    </div>
+                    <div class="client-body">
+                        <p class="client-description">${client.description}</p>
+                        <div class="client-meta">
+                            <div><i class="fas fa-hdd"></i> ${client.size}</div>
+                            <div><i class="fas fa-download"></i> ${client.downloads} 次下载</div>
+                            <div><i class="fas fa-calendar"></i> ${client.updated}</div>
+                        </div>
+                        <a href="#" class="client-download-btn" onclick="downloadClient(${client.id})">
+                            <i class="fas fa-download"></i> 下载客户端
+                        </a>
+                    </div>
+                `;
+                clientList.appendChild(card);
+            });
+        }
+
+        // 筛选客户端
+        function filterClients() {
+            const searchValue = document.getElementById('searchInput').value.toLowerCase();
+            const versionValue = document.getElementById('versionFilter').value;
+            const categoryValue = document.getElementById('categoryFilter').value;
+
+            const filteredClients = clients.filter(client => {
+                // 搜索筛选
+                const matchesSearch = client.name.toLowerCase().includes(searchValue) ||
+                    client.description.toLowerCase().includes(searchValue);
+
+                // 版本筛选
+                const matchesVersion = versionValue === 'all' || client.version === versionValue;
+
+                // 类别筛选
+                const matchesCategory = categoryValue === 'all' || client.category === categoryValue;
+
+                return matchesSearch && matchesVersion && matchesCategory;
+            });
+
+            renderClients(filteredClients);
+        }
+
+        // 下载客户端
+        function downloadClient(id) {
+            switch (id) {
+                case 1:
+                window.open("https://pan.quark.cn/s/1b832a199b9e", '_blank');
+                break;
+                case 2:
+                window.open("", '_blank');
+                break;
+                case 3:
+                window.open("", '_blank');
+                break;
+        }
+    }
+
+        // 页面加载时设置
+        document.addEventListener('DOMContentLoaded', function () {
+            initTheme();
+            renderClients(clients);
+
+            // 添加事件监听器
+            document.getElementById('searchInput').addEventListener('input', filterClients);
+            document.getElementById('versionFilter').addEventListener('change', filterClients);
+            document.getElementById('categoryFilter').addEventListener('change', filterClients);
+
+            // 添加滚动效果
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.animate').forEach(el => {
+                el.style.opacity = 0;
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+
+</html>
