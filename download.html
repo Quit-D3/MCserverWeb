@@ -642,7 +642,6 @@
                     <select id="versionFilter" class="version-select">
                         <option value="all">所有版本</option>
                         <option value="1.21.6 Fabric">1.21.6 Fabric</option>
-                        <option value="1.21.1 Fabric">1.21.1 Fabric</option>
                         <option value="1.21.1 Neoforge">1.21.1 Neoforge</option>
                     </select>
                 </div>
@@ -654,7 +653,7 @@
                     <select id="categoryFilter" class="version-select">
                         <option value="all">所有类别</option>
                         <option value="survival">纯净生存</option>
-                        <option value="poopsky">食之空</option>
+                        <option value="infinite_adventure">无尽冒险</option>
                         <option value="pixelmon">宝可梦</option>
                     </select>
                 </div>
@@ -682,7 +681,7 @@
                 <h3 class="footer-title">Snow 服务器 | 客户端下载中心</h3>
             </div>
 
-            <p class="footer-text">最后更新: 2025年07月25日</p>
+            <p class="footer-text">最后更新: 2025年08月05日</p>
 
             <div class="footer-divider"></div>
 
@@ -730,6 +729,16 @@
         const clients = [
             {
                 id: 1,
+                name: "[All for Snow]",
+                version: "*",
+                description: "包含所有Snow服务器客户端的复合压缩包，解压即玩，无需另外下载，适用于网络不好的情况<br><strong>访问码：azw1</strong>",
+                category: "all",
+                size: "2.38G",
+                downloads: 0,
+                updated: "2025-08-05"
+            },
+            {
+                id: 2,
                 name: "[纯净生存]ver1.5",
                 version: "1.21.6 Fabric",
                 description: "专为纯净生存服务器设计，包含大量优化操作体验的模组，提供极高的性能和极好的游戏体验<br><strong>访问码：4hs0</strong>",
@@ -739,23 +748,23 @@
                 updated: "2025-06-26"
             },
             {
-                id: 2,
-                name: "[食之空]ver1.0",
-                version: "1.21.1 Fabric",
-                description: "Poopsky空岛生存服务器专用客户端。<br>来源整合包：<a href='https://www.mcmod.cn/modpack/1105.html' target='_blank'>源整合包MC百科页面</a><br><strong>访问码：tj6r</strong>",
-                category: "poopsky",
-                size: "60.04M",
+                id: 3,
+                name: "[无尽冒险]ver1.0",
+                version: "1.21.1 Neoforge",
+                description: "无尽冒险大型模组服务器专用客户端, 自行整合<br>包含暮色森林 永恒星光等大型冒险模组<br><strong>访问码：vp8t</strong>",
+                category: "infinite_adventure",
+                size: "458.36M",
                 downloads: 0,
-                updated: "2025-07-25"
+                updated: "2025-08-05"
             },
             {
-                id: 3,
+                id: 4,
                 name: "[方块宝可梦]ver1.0",
                 version: "1.21.1 Neoforge",
                 description: "方块宝可梦服务器专用客户端。<br>来源整合包：<a href='https://modrinth.com/modpack/the-pixelmon-modpack' target='_blank'>源整合包Modrinth页面</a><br><strong>访问码：n1t3</strong>",
                 category: "pixelmon",
                 size: "550.05M",
-                downloads: 0,
+                downloads: 2,
                 updated: "2025-07-25"
             }
         ];
@@ -826,12 +835,15 @@
         function downloadClient(id) {
             switch (id) {
                 case 1:
-                    window.open("https://cloud.189.cn/t/iI7zmuNJvIji", '_blank');
+                    window.open("https://cloud.189.cn/t/aQzM7feIZrau", '_blank');
                     break;
                 case 2:
-                    window.open("https://cloud.189.cn/t/e2MZvurMjQNb", '_blank');
+                    window.open("https://cloud.189.cn/t/iI7zmuNJvIji", '_blank');
                     break;
                 case 3:
+                    window.open("https://cloud.189.cn/t/ZRVjMfya2iAz", '_blank');
+                    break;
+                case 4:
                     window.open("https://cloud.189.cn/t/NNr6JjQnMnaq", '_blank');
                     break;
             }
