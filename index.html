@@ -464,12 +464,6 @@
             transform: scaleX(1);
         }
 
-        .feature-icon {
-            font-size: 3.5rem;
-            color: var(--mc-blue);
-            margin-bottom: 1.5rem;
-        }
-
         .mc-card h3 {
             font-size: 1.5rem;
             margin-bottom: 10px;
@@ -488,21 +482,6 @@
 
         .dark-mode .mc-card p {
             color: #ddd;
-        }
-
-        .badge-dev {
-            display: block;
-            background: var(--mc-green);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin: 10px auto 0;
-            width: fit-content;
-        }
-
-        .dark-mode .badge-dev {
-            background: #2a6c1b;
         }
 
         .progress-section {
@@ -624,41 +603,12 @@
             color: var(--mc-text);
         }
 
-        .footer-subtitle {
-            font-size: 1rem;
-            color: var(--mc-text);
-            opacity: 0.8;
-            margin-bottom: 1.5rem;
-        }
-
         .footer-divider {
             width: 80%;
             max-width: 400px;
             height: 1px;
             background: var(--mc-border);
             margin: 1.5rem 0;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .footer-link {
-            color: var(--mc-blue);
-            text-decoration: none;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .footer-link:hover {
-            color: #1a73e8;
-            transform: translateY(-2px);
         }
 
         .copyright {
@@ -695,7 +645,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('./img/main8.png') center/cover;
             opacity: 0.1;
             z-index: 0;
         }
@@ -724,10 +673,6 @@
             margin-bottom: 20px;
             position: relative;
             z-index: 1;
-        }
-
-        .dev-badge {
-            background: var(--mc-green);
         }
 
         .server-card p {
@@ -803,12 +748,6 @@
         .support-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px var(--mc-shadow);
-        }
-
-        .support-icon {
-            font-size: 3rem;
-            color: var(--mc-blue);
-            margin-bottom: 15px;
         }
 
         .support-item h4 {
@@ -1030,11 +969,6 @@
             .hero-content h1 {
                 font-size: 2.2rem;
             }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 10px;
-            }
         }
 
         /* 动画效果 */
@@ -1066,14 +1000,6 @@
             animation-delay: 0.3s;
         }
 
-        .delay-4 {
-            animation-delay: 0.4s;
-        }
-
-        .delay-5 {
-            animation-delay: 0.5s;
-        }
-
         /* 工具类 */
         .d-flex {
             display: flex;
@@ -1083,24 +1009,12 @@
             justify-content: center;
         }
 
-        .align-items-center {
-            align-items: center;
-        }
-
         .gap-3 {
             gap: 1rem;
         }
 
         .mt-5 {
             margin-top: 3rem;
-        }
-
-        .mb-3 {
-            margin-bottom: 1rem;
-        }
-
-        .mb-4 {
-            margin-bottom: 1.5rem;
         }
 
         .me-2 {
@@ -1146,16 +1060,6 @@
                     <div class="nav-btn" onclick="window.location.href='wiki.html'">
                         <i class="fas fa-book"></i>
                         <span>WIKI</span>
-                    </div>
-
-                    <div class="nav-btn" onclick="window.location.href='gallery.html'">
-                        <i class="fas fa-images"></i>
-                        <span>画廊</span>
-                    </div>
-
-                    <div class="nav-btn" onclick="window.location.href='thankful.html'">
-                        <i class="fas fa-hands-helping"></i>
-                        <span>鸣谢</span>
                     </div>
 
                     <div class="nav-btn" onclick="window.open('https://littleskin.cn/', '_blank')">
@@ -1213,7 +1117,7 @@
             <div class="features-grid">
                 <div class="animate">
                     <div class="mc-card">
-                        <i class="fas fa-line-chart feature-icon"></i>
+                        <img src="./img/grass_block.webp" style="height: 80px;width: 80px">
                         <h3>纯净生存</h3>
                         <h4>Survival</h4>
                         <p>原汁原味生存，佐以插件优化多人游戏体验</p>
@@ -1229,12 +1133,12 @@
                     </div>
                 </div>
 
-                <div class="animate delay-1">
+                <div class="animate delay-2">
                     <div class="mc-card">
-                        <i class="fas fa-fast-forward feature-icon"></i>
-                        <h3>无尽冒险</h3>
-                        <h4>Infinite Adventure</h4>
-                        <p>在无尽的冒险中，阅读新世界的故事</p>
+                        <img src="./img/pixelmon.webp" style="height: 80px;width: 80px">
+                        <h3>方块宝可梦</h3>
+                        <h4>Pixelmon</h4>
+                        <p>历久弥新的宝可梦整合包</p>
                         <div class="progress-section">
                             <div class="progress-title">
                                 <span>运营中</span>
@@ -1247,15 +1151,15 @@
                     </div>
                 </div>
 
-                <div class="animate delay-2">
+                <div class="animate delay-1">
                     <div class="mc-card">
-                        <i class="fas fa-server feature-icon"></i>
-                        <h3>方块宝可梦</h3>
-                        <h4>Pixelmon</h4>
-                        <p>经典模组，趣味依旧</p>
+                        <img src="./img/neoforge.png" style="height: 80px;width: 80px">
+                        <h3>无尽冒险</h3>
+                        <h4>Infinite Adventure</h4>
+                        <p>在无尽的冒险中，阅读新世界的故事</p>
                         <div class="progress-section">
                             <div class="progress-title">
-                                <span>运营中</span>
+                                <span>即将开放</span>
                                 <span><i class="fas fa-check-circle"></i></span>
                             </div>
                             <div class="progress">
@@ -1382,16 +1286,6 @@
                     </div>
                 </div>
 
-                <div class="animate delay-1">
-                    <div class="server-card">
-                        <h3 class="server-title">无尽冒险</h3>
-                        <div class="server-badge">1.21.1 Neoforge</div>
-                        <p class="lead">冒险主题的大型整合包</p>
-                        <p>探索新奇世界，感受社区的强大创造力</p>
-                        <div class="status-btn status-operating">运营中</div>
-                    </div>
-                </div>
-
                 <div class="animate delay-2">
                     <div class="server-card">
                         <h3 class="server-title">方块宝可梦</h3>
@@ -1402,21 +1296,19 @@
                     </div>
                 </div>
 
-                <div class="animate delay-2">
+                <div class="animate delay-1">
                     <div class="server-card">
-                        <h3 class="server-title">More Developing</h3>
-                        <div class="server-badge">------ ----</div>
-                        <p class="lead">More Developing</p>
-                        <p>More Developing</p>
-                        <div class="status-btn status-developing">开发中</div>
+                        <h3 class="server-title">无尽冒险</h3>
+                        <div class="server-badge">1.21.1 Neoforge</div>
+                        <p class="lead">冒险主题的大型整合包</p>
+                        <p>探索新奇世界，感受社区的强大创造力</p>
+                        <div class="status-btn status-developing">即将开放</div>
                     </div>
                 </div>
+
             </div>
 
             <div class="d-flex justify-content-center gap-3 mt-5 animate delay-1">
-                <button class="mc-btn" onclick="navigateTo('wiki.html')">
-                    <i class="fas fa-book me-2"></i>服务器WIKI
-                </button>
                 <button class="mc-btn secondary" onclick="showQQModal()">
                     <i class="fas fa-users me-2"></i>加入服务器交流群
                 </button>
@@ -1430,25 +1322,6 @@
             <div class="footer-logo">
                 <i class="fas fa-snowflake floating" style="color: var(--mc-blue);"></i>
                 <h3 class="footer-title">Snow 服务器 | 轻量 & 稳定</h3>
-                <p class="footer-subtitle">最后更新: <span id="updateDate">2025年08月05日</span></p>
-            </div>
-
-            <div class="footer-links">
-                <a href="index.html" class="footer-link">
-                    <i class="fas fa-home"></i> 首页
-                </a>
-                <a href="download.html" class="footer-link">
-                    <i class="fas fa-download"></i> 客户端下载
-                </a>
-                <a href="wiki.html" class="footer-link">
-                    <i class="fas fa-book"></i> 服务器WIKI
-                </a>
-                <a href="gallery.html" class="footer-link">
-                    <i class="fas fa-images"></i> 玩家画廊
-                </a>
-                <a href="https://littleskin.cn" class="footer-link" target="_blank">
-                    <i class="fas fa-external-link-alt"></i> LittleSkin皮肤站
-                </a>
             </div>
 
             <div class="footer-divider"></div>

@@ -262,36 +262,6 @@
             font-size: 1.8rem;
         }
 
-        .toc-item {
-            margin-bottom: 8px;
-        }
-
-        .toc-btn {
-            display: block;
-            padding: 12px 15px;
-            color: white;
-            background: var(--mc-blue);
-            text-decoration: none;
-            border-radius: 6px;
-            transition: all 0.2s;
-            font-weight: 500;
-            margin-bottom: 8px;
-            border: 2px solid transparent;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .toc-btn:hover {
-            background: #1a73e8;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .toc-btn.active {
-            background: #0d5cb6;
-            border-color: white;
-            box-shadow: 0 4px 12px rgba(13, 92, 182, 0.3);
-        }
-
         .toc-category {
             margin-top: 15px;
         }
@@ -370,15 +340,6 @@
             margin: 0;
         }
 
-        .section-subtitle {
-            font-size: 1.4rem;
-            color: var(--mc-blue);
-            margin-top: 30px;
-            margin-bottom: 20px;
-            padding-left: 15px;
-            border-left: 4px solid var(--mc-blue);
-        }
-
         .section-text {
             line-height: 1.8;
             margin-bottom: 20px;
@@ -400,12 +361,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-
-        .command-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
         }
 
         .command-table th {
@@ -432,12 +387,6 @@
 
         .command-table tr:hover {
             background: rgba(45, 140, 255, 0.1);
-        }
-
-        .command-name {
-            font-family: monospace;
-            color: var(--mc-blue);
-            font-weight: bold;
         }
 
         .step-container {
@@ -552,12 +501,6 @@
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--mc-blue), transparent);
             margin: 25px 0;
-        }
-
-        .footer-text {
-            color: var(--mc-text);
-            margin: 5px 0;
-            line-height: 1.6;
         }
 
         .footer-copyright {
@@ -745,16 +688,6 @@
                         <span>WIKI</span>
                     </div>
 
-                    <div class="nav-btn" onclick="window.location.href='gallery.html'">
-                        <i class="fas fa-images"></i>
-                        <span>画廊</span>
-                    </div>
-
-                    <div class="nav-btn" onclick="window.location.href='thankful.html'">
-                        <i class="fas fa-hands-helping"></i>
-                        <span>鸣谢</span>
-                    </div>
-
                     <div class="nav-btn" onclick="window.open('https://littleskin.cn/', '_blank')">
                         <i class="fas fa-external-link-alt"></i>
                         <span>皮肤站</span>
@@ -783,7 +716,6 @@
                 <li class="toc-category">
                     <div class="toc-category-header" onclick="scrollToSection('#guide')">
                         <h3 class="toc-category-title">
-                            <i class="fas fa-info-circle"></i>
                             开始指南
                         </h3>
                     </div>
@@ -792,17 +724,7 @@
                 <li class="toc-category">
                     <div class="toc-category-header" onclick="scrollToSection('#survival')">
                         <h3 class="toc-category-title">
-                            <i class="fas fa-tree"></i>
                             纯净生存
-                        </h3>
-                    </div>
-                </li>
-
-                <li class="toc-category">
-                    <div class="toc-category-header" onclick="scrollToSection('#poopsky')">
-                        <h3 class="toc-category-title">
-                            <i class="fas fa-info-circle"></i>
-                            无尽冒险
                         </h3>
                     </div>
                 </li>
@@ -810,8 +732,15 @@
                 <li class="toc-category">
                     <div class="toc-category-header" onclick="scrollToSection('#pixelmon')">
                         <h3 class="toc-category-title">
-                            <i class="fas fa-info-circle"></i>
                             宝可梦
+                        </h3>
+                    </div>
+                </li>
+
+                <li class="toc-category">
+                    <div class="toc-category-header" onclick="scrollToSection('#infinite_adventure')">
+                        <h3 class="toc-category-title">
+                            无尽冒险
                         </h3>
                     </div>
                 </li>
@@ -819,7 +748,6 @@
                 <li class="toc-category">
                     <div class="toc-category-header" onclick="scrollToSection('#more-content')">
                         <h3 class="toc-category-title">
-                            <i class="fas fa-puzzle-piece"></i>
                             更多内容
                         </h3>
                     </div>
@@ -838,10 +766,28 @@
                 </div>
 
                 <div class="tutorial-step">
+                    <h4><i class="fas fa-0"></i> 快捷获取服务器地址</h4>
+                    <ul>
+                        若你使用校园网连接，请使用校内ip：<br>
+                        <button class="copy-btn" data-ip="10.84.195.75">
+                            <i class="fas fa-clipboard me-1"></i>Java版局域网ip复制
+                        </button>
+                        <br><br>
+                        若你暂无校园网连接，请使用校外ip：<br>
+                        <button class="copy-btn" data-ip="yd.frp-say.com:34760">
+                            <i class="fas fa-clipboard me-1"></i>Java版长沙节点复制
+                        </button>
+                        <br>
+                        <button class="copy-btn" data-ip="yd.frp-arm.com:46952">
+                            <i class="fas fa-clipboard me-1"></i>Java版西安节点复制
+                        </button>
+                    </ul>
+                </div>
+
+                <div class="tutorial-step">
                     <h4><i class="fas fa-1"></i> 安装Java运行环境</h4>
                     <ul>
-                        <li><a
-                                href="https://www.oracle.com/cn/java/technologies/downloads/#java21">前往Oracle官方网站下载Java</a>
+                        <li><a href="https://www.oracle.com/cn/java/technologies/downloads/#java21">前往Oracle官方网站下载Java</a>
                         </li>
                         <li>选择<strong><span style="color:red">JDK21</span></strong>版本，选择适用于你的操作系统的JDK安装包</li>
                         <li>安装时<strong>建议不修改路径</strong></li>
@@ -908,22 +854,6 @@
                         <li>设置完毕后进入多人游戏</li>
                         <li>点击 "添加服务器"</li>
                         <li>输入服务器IP并连接</li>
-                        <h3 class="section-subtitle">服务器ip</h3>
-                        <ul>
-                            若你使用校园网连接，请使用校内ip：<br>
-                            <button class="copy-btn" data-ip="10.84.195.75">
-                                <i class="fas fa-clipboard me-1"></i>Java版局域网ip复制
-                            </button>
-                            <br><br>
-                            若你暂无校园网连接，请使用校外ip：<br>
-                            <button class="copy-btn" data-ip="yd.frp-say.com:34760">
-                                <i class="fas fa-clipboard me-1"></i>Java版长沙节点复制
-                            </button>
-                            <br>
-                            <button class="copy-btn" data-ip="yd.frp-arm.com:46952">
-                                <i class="fas fa-clipboard me-1"></i>Java版西安节点复制
-                            </button>
-                        </ul>
                     </ul>
                 </div>
 
@@ -934,16 +864,14 @@
                     <div class="step-content">
                         <h3>完成安装！</h3>
                         <p>恭喜你完成了安装过程！现在你可以进入服务器开始你的Minecraft之旅了。</p>
-                        <p>如果在安装过程中遇到任何问题，请加入我们的QQ群寻求帮助。</p>
                     </div>
                 </div>
             </section>
 
-            <!-- 纯净生存 -->
             <section id="survival" class="wiki-section">
                 <div class="section-header">
                     <div class="section-icon">
-                        <i class="fas fa-line-chart feature-icon"></i>
+                        <img src="./img/grass_block.webp" style="height: 50px;width: 50px">
                     </div>
                     <h2 class="section-title">纯净生存 - 简介</h2>
                 </div>
@@ -956,27 +884,46 @@
                     <div class="info-card-title">
                     </div>
                     <ul>
-                        <li>领地插件：为你的家园提供全自定义的保护</li>
-                        <li>箱子商店：为你的交易提供便捷与安全</li>
-                        <li>简易菜单：为你的生存提供简易的菜单</li>
+                        <li>领地插件：为你的家园提供全面自定义的保护</li>
+                        <li>手持菜单：为你的生存提供简易的菜单</li>
                         <li>登录系统：为你的账户安全保驾护航</li>
                         <br>
                         <li>能力升级：为纯净的生存提供RPG的色彩</li>
-                        <li>砍树挖矿：为懒人提供舒适的一键挖掘</li>
-                        <li>经验瓶存储：将你的经验瓶转化为附魔之瓶，可存放可出售</li>
+                        <li>箱子商店：为你的交易提供便捷与安全</li>
                         <li>多世界支持：提供多个世界随时传送，资源世界不定期重置</li>
                     </ul>
                 </div>
-
             </section>
 
-            <!-- 无尽冒险 -->
-            <section id="poopsky" class="wiki-section">
+            <section id="pixelmon" class="wiki-section">
                 <div class="section-header">
                     <div class="section-icon">
-                        <i class="fas fa-info-circle"></i>
+                        <img src="./img/pixelmon.webp" style="height: 50px;width: 50px">
                     </div>
-                    <h2 class="section-title">食之空 - 简介</h2>
+                    <h2 class="section-title">宝可梦 - 简介</h2>
+                </div>
+
+                <p class="section-text">
+                    宝可梦服务器，基于<a href="https://neoforged.net">Neoforge</a>模组服务端建立
+                </p>
+
+                <div class="info-card">
+                    <div class="info-card-title">
+                    </div>
+                    <ul>
+                        <li>宝可梦整合包服务器，享受多人的方块宝可梦模组体验</li>
+                        <li>基于方可梦官方整合包运营服务器：<a href='https://modrinth.com/modpack/the-pixelmon-modpack'>源整合包地址</a></li>
+                        <li>宝可梦宠物 生成建筑 NPC交易等 从未变味的宝可梦生存!</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="infinite_adventure" class="wiki-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <img src="./img/neoforge.png" style="height: 50px;width: 50px">
+                    </div>
+                    <h2 class="section-title">无尽冒险 - 简介</h2>
                 </div>
 
                 <p class="section-text">
@@ -987,33 +934,9 @@
                     <div class="info-card-title">
                     </div>
                     <ul>
-                        <li>无尽冒险，高难生存，</li>
-                        <li>服务器运营团队自行整合</li>
-                        <li>包含暮色森林 天境2 永恒星光 精英怪 枪械等的大型整合包</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- 宝可梦 -->
-            <section id="pixelmon" class="wiki-section">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-info-circle"></i>
-                        </div>
-                    <h2 class="section-title">宝可梦 - 简介</h2>
-                </div>
-
-                <p class="section-text">
-                    宝可梦，基于<a href="https://neoforged.net">Neoforge</a>模组服务端建立
-                </p>
-
-                <div class="info-card">
-                    <div class="info-card-title">
-                    </div>
-                    <ul>
-                        <li>宝可梦整合包服务器，享受多人的方块宝可梦模组体验</li>
-                        <li><a href='https://modrinth.com/modpack/the-pixelmon-modpack'>源整合包地址</a></li>
-                        <li>宝可梦宠物 各类相关机械 生成建筑 等你来玩!</li>
+                        <li>以冒险模组为主打包的整合包</li>
+                        <li>由服务器运营团队自行整合</li>
+                        <li>包含暮色森林 天境2 永恒星光 精英怪 枪械等的大型冒险包</li>
                     </ul>
                 </div>
             </section>
@@ -1039,7 +962,6 @@
         </main>
     </div>
 
-    <!-- 页脚 - 已完全居中显示 -->
     <footer class="mc-footer">
         <div class="footer-container">
             <div class="footer-logo">
@@ -1047,11 +969,7 @@
                 <h3 class="footer-title">Snow 服务器 | 游玩WIKI</h3>
             </div>
 
-            <p class="footer-text">最后更新: 2025年08月05日</p>
-
             <div class="footer-divider"></div>
-
-            <p class="footer-text"> <i class="fas fa-heart" style="color: #e74c3c;"></i> 用心打造最佳游戏体验</p>
 
             <p class="footer-copyright">
                 © 2025 Snow 轻量稳定服 | Beta测试阶段
@@ -1059,7 +977,6 @@
         </div>
     </footer>
 
-    <!-- 使用Bootstrap国内CDN -->
     <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
         // 主题切换功能
