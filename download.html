@@ -573,19 +573,14 @@
                         <span>主页</span>
                     </div>
 
-                    <div class="nav-btn" onclick="window.location.href='notice.html'">
-                        <i class="fas fa-bullhorn"></i>
-                        <span>公告</span>
+                    <div class="nav-btn" onclick="window.location.href='wiki.html'">
+                        <i class="fas fa-book"></i>
+                        <span>WIKI</span>
                     </div>
 
                     <div class="nav-btn active" onclick="window.location.href='download.html'">
                         <i class="fas fa-download"></i>
                         <span>下载</span>
-                    </div>
-
-                    <div class="nav-btn" onclick="window.location.href='wiki.html'">
-                        <i class="fas fa-book"></i>
-                        <span>WIKI</span>
                     </div>
 
                     <div class="nav-btn" onclick="window.open('https://littleskin.cn/', '_blank')">
@@ -628,6 +623,7 @@
                         <option value="all">所有版本</option>
                         <option value="1.21.6 Fabric">1.21.6 Fabric</option>
                         <option value="1.21.1 Neoforge">1.21.1 Neoforge</option>
+                        <option value="1.20.1 Forge">1.20.1 Forge</option>
                     </select>
                 </div>
 
@@ -640,6 +636,7 @@
                         <option value="survival">纯净生存</option>
                         <option value="infinite_adventure">无尽冒险</option>
                         <option value="pixelmon">宝可梦</option>
+                        <option value="closing_song">落幕曲</option>
                     </select>
                 </div>
             </div>
@@ -710,44 +707,44 @@
         const clients = [
             {
                 id: 1,
-                name: "[All for Snow]",
-                version: "*",
-                description: "包含所有Snow服务器客户端的复合压缩包，解压即玩，无需另外下载，适用于网络不好的情况<br><strong>访问码：d3a9</strong>",
-                category: "all",
-                size: "2.38G",
-                downloads: 0,
-                updated: "2025-08-05"
-            },
-            {
-                id: 2,
                 name: "[纯净生存]ver1.5",
                 version: "1.21.6 Fabric",
                 description: "专为纯净生存服务器设计，包含大量优化操作体验的模组，提供极高的性能和极好的游戏体验<br><strong>访问码：4hs0</strong>",
                 category: "survival",
                 size: "108.40M",
-                downloads: 14,
+                downloads: 27,
                 updated: "2025-06-26"
             },
             {
-                id: 3,
+                id: 2,
                 name: "[方块宝可梦]ver1.0",
                 version: "1.21.1 Neoforge",
                 description: "方块宝可梦服务器专用客户端。<br>来源整合包：<a href='https://modrinth.com/modpack/the-pixelmon-modpack' target='_blank'>源整合包Modrinth页面</a><br><strong>访问码：n1t3</strong>",
                 category: "pixelmon",
                 size: "550.05M",
-                downloads: 2,
+                downloads: 14,
                 updated: "2025-07-25"
             },
             {
-                id: 4,
+                id: 3,
                 name: "[无尽冒险]ver1.0",
                 version: "1.21.1 Neoforge",
                 description: "无尽冒险大型模组服务器专用客户端, 自行整合<br>包含暮色森林 永恒星光等大型冒险模组<br><strong>访问码：xn6a</strong>",
                 category: "infinite_adventure",
                 size: "458.36M",
-                downloads: 0,
-                updated: "2025-08-05"
+                downloads: 8,
+                updated: "2025-08-25"
             },
+            {
+                id: 4,
+                name: "[落幕曲]ver1.5",
+                version: "1.20.1 Forge",
+                description: "落幕曲服务器专用客户端。 <br>来源整合包：<a href='https://www.bilibili.com/video/BV1RPTxzcELj' target='_blank'>源整合包Bilibili发布页面</a><br><strong>访问码：pe7v</strong>",
+                category: "closing_song",
+                size: "663.80M",
+                downloads: 4,
+                updated: "2025-09-21"
+            }
         ];
 
         // 渲染客户端列表
@@ -816,16 +813,16 @@
         function downloadClient(id) {
             switch (id) {
                 case 1:
-                    window.open("http://cloud.189.cn/t/rAjUFbMF7ZJn", '_blank');
-                    break;
-                case 2:
                     window.open("https://cloud.189.cn/t/iI7zmuNJvIji", '_blank');
                     break;
-                case 3:
+                case 2:
                     window.open("https://cloud.189.cn/t/NNr6JjQnMnaq", '_blank');
                     break;
-                case 4:
+                case 3:
                     window.open("https://cloud.189.cn/t/mEriquMJjQBz", '_blank');
+                    break;
+                case 4:
+                    window.open("https://cloud.189.cn/t/YzIZB3EzEZz2", '_blank');
                     break;
             }
         }
