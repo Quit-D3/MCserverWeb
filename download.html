@@ -621,9 +621,9 @@
                     </label>
                     <select id="versionFilter" class="version-select">
                         <option value="all">所有版本</option>
-                        <option value="1.21.6 Fabric">1.21.6 Fabric</option>
-                        <option value="1.21.1 Neoforge">1.21.1 Neoforge</option>
-                        <option value="1.20.1 Forge">1.20.1 Forge</option>
+                        <option value="All">多合一</option>
+                        <option value="1.21.1 Fabric">1.21.1 Fabric</option>
+                        <option value="1.21.1 Fabric">1.21.11 Fabric</option>
                     </select>
                 </div>
 
@@ -633,10 +633,10 @@
                     </label>
                     <select id="categoryFilter" class="version-select">
                         <option value="all">所有类别</option>
-                        <option value="survival">纯净生存</option>
-                        <option value="infinite_adventure">无尽冒险</option>
-                        <option value="pixelmon">宝可梦</option>
-                        <option value="closing_song">落幕曲</option>
+                        <option value="All">多合一</option>
+                        <option value="Survival">纯净懒人</option>
+                        <option value="Cobblemon">方可梦</option>
+
                     </select>
                 </div>
             </div>
@@ -707,43 +707,27 @@
         const clients = [
             {
                 id: 1,
-                name: "[纯净生存]ver1.5",
-                version: "1.21.6 Fabric",
-                description: "专为纯净生存服务器设计，包含大量优化操作体验的模组，提供极高的性能和极好的游戏体验<br><strong>访问码：4hs0</strong>",
-                category: "survival",
-                size: "108.40M",
-                downloads: 27,
-                updated: "2025-06-26"
+                name: "[多合一]懒人+方可梦",
+                version: "All",
+                description: "解压即玩，免除额外下载<br>适用于网络不好的情况<br><strong>访问码：rz8c</strong>",
+                category: "All",
+                updated: "2026-02-01"
             },
             {
                 id: 2,
-                name: "[方块宝可梦]ver1.0",
-                version: "1.21.1 Neoforge",
-                description: "方块宝可梦服务器专用客户端。<br>来源整合包：<a href='https://modrinth.com/modpack/the-pixelmon-modpack' target='_blank'>源整合包Modrinth页面</a><br><strong>访问码：n1t3</strong>",
-                category: "pixelmon",
-                size: "550.05M",
-                downloads: 14,
-                updated: "2025-07-25"
+                name: "[纯净懒人]ver1.6",
+                version: "1.21.11 Fabric",
+                description: "懒人与优化模组<br>让纯净生存更为优化方便<br><strong>访问码：3muv</strong>",
+                category: "Survival",
+                updated: "2026-01-31"
             },
             {
                 id: 3,
-                name: "[无尽冒险]ver1.0",
-                version: "1.21.1 Neoforge",
-                description: "无尽冒险大型模组服务器专用客户端, 自行整合<br>包含暮色森林 永恒星光等大型冒险模组<br><strong>访问码：xn6a</strong>",
-                category: "infinite_adventure",
-                size: "458.36M",
-                downloads: 8,
-                updated: "2025-08-25"
-            },
-            {
-                id: 4,
-                name: "[落幕曲]ver1.5",
-                version: "1.20.1 Forge",
-                description: "落幕曲服务器专用客户端。 <br>来源整合包：<a href='https://www.bilibili.com/video/BV1RPTxzcELj' target='_blank'>源整合包Bilibili发布页面</a><br><strong>访问码：32as</strong>",
-                category: "closing_song",
-                size: "1.30G",
-                downloads: 4,
-                updated: "2025-09-20"
+                name: "[方可梦]ver2.0",
+                version: "1.21.1 Fabric",
+                description: "方块宝可梦服务器专用客户端。<br>来源整合包：<a href='https://modrinth.com/modpack/cobblemon-fabric' target='_blank'>源整合包Modrinth页面</a><br><strong>访问码：jx6t</strong>",
+                category: "Cobblemon",
+                updated: "2026-02-01"
             }
         ];
 
@@ -773,8 +757,6 @@
                     <div class="client-body">
                         <p class="client-description">${client.description}</p>
                         <div class="client-meta">
-                            <div><i class="fas fa-hdd"></i> ${client.size}</div>
-                            <div><i class="fas fa-download"></i> ${client.downloads} 次下载</div>
                             <div><i class="fas fa-calendar"></i> ${client.updated}</div>
                         </div>
                         <a href="#" class="client-download-btn" onclick="downloadClient(${client.id})">
@@ -813,16 +795,13 @@
         function downloadClient(id) {
             switch (id) {
                 case 1:
-                    window.open("https://cloud.189.cn/t/iI7zmuNJvIji", '_blank');
+                    window.open("https://cloud.189.cn/t/eA3i22bUfIV3", '_blank');
                     break;
                 case 2:
-                    window.open("https://cloud.189.cn/t/NNr6JjQnMnaq", '_blank');
+                    window.open("https://cloud.189.cn/t/qUFVfq3eye2e", '_blank');
                     break;
                 case 3:
-                    window.open("https://cloud.189.cn/t/mEriquMJjQBz", '_blank');
-                    break;
-                case 4:
-                    window.open("https://cloud.189.cn/t/YzaEFnfYrQFj", '_blank');
+                    window.open("https://cloud.189.cn/t/RF7juenqQ7Vn", '_blank');
                     break;
             }
         }
